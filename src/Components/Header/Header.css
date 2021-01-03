@@ -1,0 +1,26 @@
+.header {
+    padding: 1rem;
+    border-bottom: 1px solid #ececec;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-inner a {
+    color: #000;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+.header-inner a:hover {
+    color: rgb(82, 150, 228);
+}
+
+.header-inner a:last-child {
+    margin-right: 0;
+}
+.header-inner a.active {
+    color:  rgb(82, 150, 228);
+    text-decoration: underline;
+}

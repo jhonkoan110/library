@@ -1,0 +1,11 @@
+.authors h1 {
+    margin-bottom: 1rem;
+}
+
+.authors ul {
+    list-style: none;
+}
+.authors li {
+    margin-bottom: .5rem;
+
+}
