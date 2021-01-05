@@ -1,38 +1,24 @@
-import { Route } from "react-router-dom";
-import "./Main.css";
-import AuthorsContainer from "../Authors/AuthorsContainer";
-import BooksContainer from "../Books/BooksContainer";
-import GenresContainer from "../Genres/GenresContainer";
-import SignupContainer from "../Auth/Signup/SignupContainer";
-import LoginContainer from "../Auth/Login/LoginContainer";
-
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AuthorsContainer from '../Authors/index';
+import BooksContainer from '../Books/index';
+import GenresContainer from '../Genres/index';
+import SignupContainer from '../Auth/Signup/index';
+import LoginContainer from '../Auth/Login/index';
+import './Main.css';
 
 const Main = () => {
     return (
-        <main className='main'>
-            <Route 
-                path='/books'
-                component={BooksContainer}
-            />
-            <Route 
-                path='/genres'
-                render={ () => <GenresContainer /> }
-            />
-            <Route 
-                path='/authors'
-                render={ () => <AuthorsContainer /> }
-            />
-            <Route 
-                path='/login'
-                render={ () => <LoginContainer /> }
-            />
-            <Route 
-                path='/signup'
-                render={ () => <SignupContainer /> }
-            />
+        <main className="main">
+            <Switch>
+                <Route path="/books" render={() => <BooksContainer />} />
+                <Route path="/genres" render={() => <GenresContainer />} />
+                <Route path="/authors" render={() => <AuthorsContainer />} />
+                <Route path="/login" render={() => <LoginContainer />} />
+                <Route path="/signup" render={() => <SignupContainer />} />
+            </Switch>
         </main>
-    )
-}
-
+    );
+};
 
 export default Main;

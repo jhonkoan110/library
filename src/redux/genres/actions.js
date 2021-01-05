@@ -1,14 +1,29 @@
-import { GENRES_FETCH_DATA_SUCCESS, GENRES_HAS_ERRORED, GENRES_IS_LOADING } from "./actionTypes";
+import { GENRES_FETCH_DATA_SUCCESS, GENRES_HAS_ERRORED, GENRES_IS_LOADING } from './actionTypes';
 
-export const genresHasErrored = bool => ({ type: GENRES_HAS_ERRORED, hasErrored: bool });
-export const genresIsLoading = bool => ({ type: GENRES_IS_LOADING, isLoading: bool });
-export const genresFetchDataSuccess = genres => ({ type: GENRES_FETCH_DATA_SUCCESS, genres });
+export const genresHasErrored = (bool) => {
+    return {
+        type: GENRES_HAS_ERRORED,
+        hasErrored: bool,
+    };
+};
+export const genresIsLoading = (bool) => {
+    return {
+        type: GENRES_IS_LOADING,
+        isLoading: bool,
+    };
+};
+export const genresFetchDataSuccess = (genres) => {
+    return {
+        type: GENRES_FETCH_DATA_SUCCESS,
+        genres,
+    };
+};
 
-export const genresFetchData = url => dispatch => {
+export const genresFetchData = (url) => (dispatch) => {
     dispatch(genresIsLoading(true));
 
     fetch(url)
-        .then(response => {
+        .then((response) => {
             if (!response.ok) {
                 throw Error(response.statusText);
             }
@@ -17,7 +32,7 @@ export const genresFetchData = url => dispatch => {
 
             return response;
         })
-        .then(response => response.json())
-        .then(genres => dispatch(genresFetchDataSuccess(genres)))
-        .catch( () => dispatch(genresHasErrored(true)) );
-}
+        .then((response) => response.json())
+        .then((genres) => dispatch(genresFetchDataSuccess(genres)))
+        .catch(() => dispatch(genresHasErrored(true)));
+};

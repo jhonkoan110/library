@@ -1,26 +1,19 @@
-import { Component } from "react";
-import { connect } from "react-redux";
-import Header from "./Header";
-
+import React from 'react';
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import Header from './Header';
 
 class HeaderContainer extends Component {
-
-    render () {
-
+    render() {
         const { user, token } = this.props;
 
-        return <Header 
-                    user={user}
-                    token={token}
-        />
+        return <Header user={user} token={token} />;
     }
 }
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     user: state.auth.user,
-    token: state.auth.token
+    token: state.auth.token,
 });
-
 
 export default connect(mapStateToProps)(HeaderContainer);

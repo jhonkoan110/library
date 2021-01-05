@@ -1,1 +1,3 @@
 export const AUTH_DATA = 'AUTH_DATA';
+export const LOGIN_HAS_ERRORED = 'LOGIN_HAS_ERRORED';
+export const LOGIN_IS_LOADING = 'LOGIN_IS_LOADING';

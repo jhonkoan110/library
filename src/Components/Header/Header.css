@@ -21,6 +21,6 @@
     margin-right: 0;
 }
 .header-inner a.active {
-    color:  rgb(82, 150, 228);
+    color: rgb(82, 150, 228);
     text-decoration: underline;
 }

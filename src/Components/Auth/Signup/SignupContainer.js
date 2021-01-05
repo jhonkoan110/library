@@ -1,20 +1,20 @@
-import { Component } from "react";
-import { connect } from "react-redux";
-import {
-    setResponseText,
-    signupFetchPostData,
-    updateEmailText,
-    updateFirstnameText,
-    updateLastnameText,
-    updateLoginText,
-    updatePasswordText
-} from "../../../redux/signup/actions";
+import React from 'react';
+import { Component } from 'react';
+import { connect } from 'react-redux';
 import Signup from './Signup';
-
+import { setResponseText, signupFetchPostData } from '../../../redux/signup/actions';
 
 class SignupContainer extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            firstNameText: '',
+            lastNameText: '',
+            loginText: '',
+            emailText: '',
+            passwordText: '',
+        };
+
         this.onChangeFirstnameInpuText.bind(this);
         this.onChangeLastnameInputText.bind(this);
         this.onChangeLoginInputText.bind(this);
@@ -23,66 +23,64 @@ class SignupContainer extends Component {
         this.onRegistrationButtonClick.bind(this);
     }
 
-    onChangeFirstnameInpuText = event => {
+    onChangeFirstnameInpuText = (event) => {
         const text = event.target.value;
-        this.props.updateFirstnameText(text);
-    }
+        this.setState({ firstNameText: text });
+    };
 
-    onChangeLastnameInputText = event => {
+    onChangeLastnameInputText = (event) => {
         const text = event.target.value;
-        this.props.updateLastnameText(text);
-    }
+        this.setState({ lastNameText: text });
+    };
 
-    onChangeLoginInputText = event => {
+    onChangeLoginInputText = (event) => {
         const text = event.target.value;
-        this.props.updateLoginText(text);
-    }
+        this.setState({ loginText: text });
+    };
 
-    onChangeEmailInputText = event => {
+    onChangeEmailInputText = (event) => {
         const text = event.target.value;
-        this.props.updateEmailText(text);
-    }
+        this.setState({ emailText: text });
+    };
 
-    onChangePasswordInputText = event => {
+    onChangePasswordInputText = (event) => {
         const text = event.target.value;
-        this.props.updatePasswordText(text);
-    }
+        this.setState({ passwordText: text });
+    };
 
-    onRegistrationButtonClick = event => {
+    onRegistrationButtonClick = (event) => {
         event.preventDefault();
         const signupFormData = {
-            firstName: this.props.firstNameText,
-            lastName: this.props.lastNameText,
-            login: this.props.loginText,
-            email: this.props.emailText,
-            password: this.props.passwordText
+            firstName: this.state.firstNameText,
+            lastName: this.state.lastNameText,
+            login: this.state.loginText,
+            email: this.state.emailText,
+            password: this.state.passwordText,
         };
-        this.props.signupFetchPostData('http://localhost:54407/api/auth/registration', signupFormData);
-    }
+        this.props.signupFetchPostData(
+            'http://localhost:54407/api/auth/registration',
+            signupFormData,
+        );
+        this.setState({
+            firstNameText: '',
+            lastNameText: '',
+            loginText: '',
+            emailText: '',
+            passwordText: '',
+        });
+    };
 
     onLoginLinkClick = () => {
         this.props.setResponseText('');
-    }
+    };
 
     render() {
+        const { firstNameText, lastNameText, loginText, emailText, passwordText } = this.state;
+        const { hasErrored, isLoading, responseText } = this.props;
 
-        const {
-            firstNameText,
-            lastNameText,
-            loginText,
-            emailText,
-            passwordText,
-            hasErrored,
-            isLoading,
-            responseText
-        } = this.props;
+        if (hasErrored) return <p>{responseText}</p>;
 
-        if (hasErrored) 
-            return <p>{responseText}</p>
-
-        if (isLoading)
-            return <p>Loading...</p>
-
+        if (isLoading) return <p>Loading...</p>;
 
         return (
             <div>
@@ -102,33 +100,24 @@ class SignupContainer extends Component {
                     onLoginLinkClick={this.onLoginLinkClick}
                 />
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        firstNameText: state.signup.firstNameText,
-        lastNameText: state.signup.lastNameText,
-        loginText: state.signup.loginText,
-        emailText: state.signup.emailText,
-        passwordText: state.signup.passwordText,
         hasErrored: state.signup.hasErrored,
         isLoading: state.signup.isLoading,
-        responseText: state.signup.responseText
-    }
-}
+        responseText: state.signup.responseText,
+    };
+};
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        updateFirstnameText: text => dispatch(updateFirstnameText(text)),
-        updateLastnameText: text => dispatch(updateLastnameText(text)),
-        updateLoginText: text => dispatch(updateLoginText(text)),
-        updateEmailText: text => dispatch(updateEmailText(text)),
-        updatePasswordText: text => dispatch(updatePasswordText(text)),
-        signupFetchPostData: (url, signupFormData) => dispatch(signupFetchPostData(url, signupFormData)),
-        setResponseText: text => dispatch(setResponseText(text))
-    }
-}
+        signupFetchPostData: (url, signupFormData) =>
+            dispatch(signupFetchPostData(url, signupFormData)),
+        setResponseText: (text) => dispatch(setResponseText(text)),
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupContainer);
