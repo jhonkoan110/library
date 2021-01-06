@@ -1,5 +1,4 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Signup from './Signup';
 import { setResponseText, signupFetchPostData } from '../../../redux/signup/actions';
@@ -7,6 +6,7 @@ import { setResponseText, signupFetchPostData } from '../../../redux/signup/acti
 class SignupContainer extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             firstNameText: '',
             lastNameText: '',
@@ -14,42 +14,17 @@ class SignupContainer extends Component {
             emailText: '',
             passwordText: '',
         };
-
-        this.onChangeFirstnameInpuText.bind(this);
-        this.onChangeLastnameInputText.bind(this);
-        this.onChangeLoginInputText.bind(this);
-        this.onChangeEmailInputText.bind(this);
-        this.onChangePasswordInputText.bind(this);
-        this.onRegistrationButtonClick.bind(this);
     }
 
-    onChangeFirstnameInpuText = (event) => {
+    onChangeInputHadler = (event) => {
         const text = event.target.value;
-        this.setState({ firstNameText: text });
+        const inputId = event.target.id;
+        this.setState({ [inputId]: text });
     };
 
-    onChangeLastnameInputText = (event) => {
-        const text = event.target.value;
-        this.setState({ lastNameText: text });
-    };
-
-    onChangeLoginInputText = (event) => {
-        const text = event.target.value;
-        this.setState({ loginText: text });
-    };
-
-    onChangeEmailInputText = (event) => {
-        const text = event.target.value;
-        this.setState({ emailText: text });
-    };
-
-    onChangePasswordInputText = (event) => {
-        const text = event.target.value;
-        this.setState({ passwordText: text });
-    };
-
-    onRegistrationButtonClick = (event) => {
+    onRegistrationButtonClickHandler = (event) => {
         event.preventDefault();
+
         const signupFormData = {
             firstName: this.state.firstNameText,
             lastName: this.state.lastNameText,
@@ -57,10 +32,12 @@ class SignupContainer extends Component {
             email: this.state.emailText,
             password: this.state.passwordText,
         };
+
         this.props.signupFetchPostData(
             'http://localhost:54407/api/auth/registration',
             signupFormData,
         );
+
         this.setState({
             firstNameText: '',
             lastNameText: '',
@@ -70,7 +47,7 @@ class SignupContainer extends Component {
         });
     };
 
-    onLoginLinkClick = () => {
+    onLoginLinkClickHandler = () => {
         this.props.setResponseText('');
     };
 
@@ -91,13 +68,9 @@ class SignupContainer extends Component {
                     loginText={loginText}
                     emailText={emailText}
                     passwordText={passwordText}
-                    onChangeFirstnameInpuText={this.onChangeFirstnameInpuText}
-                    onChangeLastnameInputText={this.onChangeLastnameInputText}
-                    onChangeLoginInputText={this.onChangeLoginInputText}
-                    onChangeEmailInputText={this.onChangeEmailInputText}
-                    onChangePasswordInputText={this.onChangePasswordInputText}
-                    onRegistrationButtonClick={this.onRegistrationButtonClick}
-                    onLoginLinkClick={this.onLoginLinkClick}
+                    onChangeInput={this.onChangeInputHadler}
+                    onRegistrationButtonClick={this.onRegistrationButtonClickHandler}
+                    onLoginLinkClick={this.onLoginLinkClickHandler}
                 />
             </div>
         );

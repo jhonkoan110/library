@@ -1,6 +1,9 @@
 import { AUTH_DATA, LOGIN_HAS_ERRORED, LOGIN_IS_LOADING } from './actionTypes';
 
 export const setAuthData = (token = null, user = null) => {
+    if (token === null && user === null) {
+        localStorage.clear();
+    }
     return {
         type: AUTH_DATA,
         payload: { token, user },

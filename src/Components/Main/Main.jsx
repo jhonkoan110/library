@@ -11,11 +11,21 @@ const Main = () => {
     return (
         <main className="main">
             <Switch>
-                <Route path="/books" render={() => <BooksContainer />} />
-                <Route path="/genres" render={() => <GenresContainer />} />
-                <Route path="/authors" render={() => <AuthorsContainer />} />
-                <Route path="/login" render={() => <LoginContainer />} />
-                <Route path="/signup" render={() => <SignupContainer />} />
+                <Route path="/books">
+                    <BooksContainer />
+                </Route>
+                <Route path="/genres">
+                    <GenresContainer />
+                </Route>
+                <Route path="/authors">
+                    <AuthorsContainer />
+                </Route>
+                <Route path="/login">
+                    <LoginContainer />
+                </Route>
+                <Route path="/signup">
+                    <SignupContainer />
+                </Route>
             </Switch>
         </main>
     );

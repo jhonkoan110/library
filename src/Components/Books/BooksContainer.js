@@ -1,20 +1,36 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Books from './Books';
 import { booksFetchData, booksSetCurrentPage } from '../../redux/books/actions';
 
 class BooksContainer extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentPage: 1,
+            booksPerPage: 10,
+        };
+    }
+
     componentDidMount() {
         this.props.fetchData('http://localhost:54407/api/books');
     }
 
-    onPageNumberClick = (event, pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
+    onPageNumberClickHandler = (event, pageNumber) => {
+        this.setState({
+            currentPage: pageNumber,
+        });
     };
 
     render() {
-        const { books, hasErrored, isLoading, currentPage, booksPerPage } = this.props;
+        const { currentPage, booksPerPage } = this.state;
+        const { books, hasErrored, isLoading } = this.props;
+
+        const indexOfLastBook = currentPage * booksPerPage;
+        const indexOfFirstBook = indexOfLastBook - booksPerPage;
+        const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+        const booksCount = Math.ceil(books.length / booksPerPage);
 
         if (hasErrored) {
             return <p>Произошла ошибка при загрузке книг.</p>;
@@ -26,10 +42,10 @@ class BooksContainer extends Component {
 
         return (
             <Books
-                books={books}
-                booksPerPage={booksPerPage}
+                booksCount={booksCount}
                 currentPage={currentPage}
-                onPageNumberClick={this.onPageNumberClick}
+                currentBooks={currentBooks}
+                onPageNumberClick={this.onPageNumberClickHandler}
             />
         );
     }
@@ -40,8 +56,6 @@ let mapStateToProps = (state) => {
         books: state.books.books,
         hasErrored: state.books.hasErrored,
         isLoading: state.books.isLoading,
-        currentPage: state.books.currentPage,
-        booksPerPage: state.books.booksPerPage,
     };
 };
 

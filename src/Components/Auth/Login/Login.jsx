@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Login.css';
 
-const Login = (props) => {
+const Login = ({ usernameText, passwordText, onChangeInputText, onLoginButtonClick }) => {
     return (
         <div className="login">
             <form className="login-form">
@@ -12,8 +12,9 @@ const Login = (props) => {
                     <input
                         type="text"
                         placeholder="Ваш логин"
-                        value={props.usernameText}
-                        onChange={props.onChangeUsernameInputText}
+                        value={usernameText}
+                        onChange={onChangeInputText}
+                        id="usernameText"
                     />
                 </div>
                 <div className="form-item-container">
@@ -21,12 +22,13 @@ const Login = (props) => {
                     <input
                         type="password"
                         placeholder="Ваш пароль"
-                        value={props.passwordText}
-                        onChange={props.onChangePasswordInputText}
+                        value={passwordText}
+                        onChange={onChangeInputText}
+                        id="passwordText"
                     />
                 </div>
                 <div className="form-item-container">
-                    <button onClick={props.onLoginButtonClick}>Войти</button>
+                    <button onClick={onLoginButtonClick}>Войти</button>
                 </div>
                 <div className="form-item-container">
                     <p>

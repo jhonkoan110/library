@@ -1,7 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Signup = (props) => {
+const Signup = ({
+    firstNameText,
+    lastNameText,
+    loginText,
+    emailText,
+    passwordText,
+    onChangeInput,
+    onRegistrationButtonClick,
+    onLoginLinkClick,
+}) => {
     return (
         <div className="login">
             <form className="login-form">
@@ -10,52 +19,44 @@ const Signup = (props) => {
                     <label htmlFor="">Имя</label>
                     <input
                         type="text"
-                        value={props.firstNameText}
-                        onChange={props.onChangeFirstnameInpuText}
+                        value={firstNameText}
+                        onChange={onChangeInput}
+                        id="firstNameText"
                     />
                 </div>
                 <div className="form-item-container">
                     <label htmlFor="">Фамилия</label>
                     <input
                         type="text"
-                        value={props.lastNameText}
-                        onChange={props.onChangeLastnameInputText}
+                        value={lastNameText}
+                        onChange={onChangeInput}
+                        id="lastNameText"
                     />
                 </div>
                 <div className="form-item-container">
                     <label htmlFor="">Логин</label>
-                    <input
-                        type="text"
-                        value={props.loginText}
-                        onChange={props.onChangeLoginInputText}
-                    />
+                    <input type="text" value={loginText} onChange={onChangeInput} id="loginText" />
                 </div>
                 <div className="form-item-container">
                     <label htmlFor="">Ваша почта</label>
-                    <input
-                        type="text"
-                        value={props.emailText}
-                        onChange={props.onChangeEmailInputText}
-                    />
+                    <input type="text" value={emailText} onChange={onChangeInput} id="emailText" />
                 </div>
                 <div className="form-item-container">
                     <label>Пароль</label>
                     <input
                         type="password"
-                        value={props.passwordText}
-                        onChange={props.onChangePasswordInputText}
+                        value={passwordText}
+                        onChange={onChangeInput}
+                        id="passwordText"
                     />
                 </div>
                 <div className="form-item-container">
-                    <button onClick={props.onRegistrationButtonClick}>Зарегистрироваться</button>
+                    <button onClick={onRegistrationButtonClick}>Зарегистрироваться</button>
                 </div>
                 <div className="form-item-container">
                     <p>
                         Уже есть учётная запись?{' '}
-                        <NavLink
-                            to="/login"
-                            className="signup-btn"
-                            onClick={props.onLoginLinkClick}>
+                        <NavLink to="/login" className="signup-btn" onClick={onLoginLinkClick}>
                             Войти
                         </NavLink>
                     </p>

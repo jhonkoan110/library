@@ -1,5 +1,4 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Authors from './Authors';
 import { authorsFetchData } from '../../redux/authors/actions';

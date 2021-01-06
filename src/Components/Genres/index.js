@@ -1,3 +1,1 @@
-import GenresContainer from './GenresContainer';
-
-export default GenresContainer;
+export { default } from './GenresContainer';

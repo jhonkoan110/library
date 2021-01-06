@@ -3,7 +3,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import './Books.css';
 
-const Books = ({ books, currentPage, booksPerPage, onPageNumberClick }) => {
+const Books = ({ currentPage, booksCount, onPageNumberClick, currentBooks }) => {
     const theme = createMuiTheme({
         palette: {
             primary: {
@@ -14,10 +14,6 @@ const Books = ({ books, currentPage, booksPerPage, onPageNumberClick }) => {
             },
         },
     });
-
-    const indexOfLastBook = currentPage * booksPerPage;
-    const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
     return (
         <div>
@@ -49,7 +45,7 @@ const Books = ({ books, currentPage, booksPerPage, onPageNumberClick }) => {
                     page={currentPage}
                     onChange={onPageNumberClick}
                     boundaryCount={2}
-                    count={Math.ceil(books.length / booksPerPage)}
+                    count={booksCount}
                     siblingCount={1}
                 />
             </ThemeProvider>

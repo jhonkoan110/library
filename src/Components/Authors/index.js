@@ -1,3 +1,1 @@
-import AuthorsContainer from './AuthorsContainer';
-
-export default AuthorsContainer;
+export { default } from './AuthorsContainer';

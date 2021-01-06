@@ -13,6 +13,7 @@
     text-align: center;
     margin-bottom: 2rem;
 }
+
 .form-item-container {
     margin-bottom: 1rem;
 }
@@ -24,10 +25,12 @@
     margin: 0 3rem;
     width: calc(100% - 6rem);
 }
+
 .login-form label {
     margin-bottom: 0.3rem;
     font-size: 0.9rem;
 }
+
 .login-form input {
     padding: 0.5rem;
     outline-color: rgb(97, 196, 226);
@@ -38,6 +41,7 @@
     border-radius: 5px;
     background-color: #f7f7f7;
 }
+
 .login-form button {
     padding: 0.7rem;
     color: #fff;
@@ -47,6 +51,7 @@
     font-size: 0.9rem;
     outline: none;
 }
+
 .login-form button:hover {
     cursor: pointer;
     background-color: rgb(196, 192, 192);
@@ -59,6 +64,7 @@
     color: gray;
     cursor: pointer;
 }
+
 .forgot-password:hover,
 .signup-btn:hover {
     color: rgb(97, 196, 226);
